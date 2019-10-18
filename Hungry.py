@@ -1,1 +1,2 @@
-print("I am Hungry")
+i = input("Enter a number : ")
+print("chacharealsmooth")
