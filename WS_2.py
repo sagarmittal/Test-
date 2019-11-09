@@ -38,16 +38,21 @@ ITEM_HTML = '''<html><head></head><body>
 
 soup = BeautifulSoup(ITEM_HTML, 'html.parser')
 
+
 def find_item_name():
     locator = 'article.product_pod h3 a'  # CSS Locator
     item_link = soup.select_one(locator)
     item_name = item_link.attrs['title']
+    # item_name = item_link.attrs.get('title', [])
+    # both will work just fine
     print(item_name)
+
 
 def find_item_nlink():
     locator = 'article.product_pod h3 a'  # CSS Locator
     item_link = soup.select_one(locator).attrs['href']
     print(item_link)
+
 
 def find_item_price():
     locator = 'article.product_pod p.price_color'
@@ -59,11 +64,14 @@ def find_item_price():
     print(matcher.group[0])  # $51.77
     print(float(matcher.group[1]*0.8))  # 51.77
 
+
 def find_item_rating():
     locator = 'article.product_pod p.star-Rating'
     star_rating_tag = soup.select_one(locator)
     classes = star_rating_tag.attrs['class']
+    print(classes, " :", end=' ')
     rating_classes = [r for r in classes if r != 'star-Rating']
+    print(rating_classes)
     print(rating_classes[0])
 
 
